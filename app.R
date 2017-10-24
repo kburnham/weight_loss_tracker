@@ -16,9 +16,11 @@ library(lubridate)
 initial_weight <- 257.6
 target_weight <- 195.0
 
-read_log <- function() {
-  log <- "weight_loss_log" %>% gs_title() %>% gs_read_csv()
-  }
+# read_log <- function() {
+#   log <- "weight_loss_log" %>% gs_title() %>% gs_read_csv()
+#   }
+
+read_log <- function() readRDS("log.rds")
 
 compute_ws <- function(log, days_to_average = 7) {
   log %>% 
@@ -94,9 +96,10 @@ server <- function(input, output) {
   log <- eventReactive(input$add_weight, {
     if (!is.na(input$weight)) {
       dat <- data.frame(input$date_added, as.numeric(input$weight))
-      "weight_loss_log" %>% gs_title %>% gs_add_row(input = dat)
+      new <- read_log() %>% bind_rows(dat)
+      saveRDS(new, "log.rds")
     }
-    return(read_log())
+    return(new)
   }, ignoreNULL = FALSE)
   
   ws <- reactive({compute_ws(log(), days_to_average = input$days_to_average)})
