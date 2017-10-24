@@ -1,0 +1,12 @@
+name: weight_loss_tracker_app
+title: weight_loss_tracker_app
+username:
+account: kburnham
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 218551
+bundleId: 1012273
+url: https://kburnham.shinyapps.io/weight_loss_tracker_app/
+when: 1507208575.55542
+asMultiple: FALSE
+asStatic: FALSE
