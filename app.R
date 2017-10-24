@@ -95,11 +95,14 @@ server <- function(input, output) {
   
   log <- eventReactive(input$add_weight, {
     if (!is.na(input$weight)) {
-      dat <- data.frame(input$date_added, as.numeric(input$weight))
-      new <- read_log() %>% bind_rows(dat)
+      dat <- data.frame(Date = input$date_added, Weight = as.numeric(input$weight))
+      new <- bind_rows(read_log(), dat)
       saveRDS(new, "log.rds")
+      return(new)
+    } else {
+      return(read_log())
     }
-    return(new)
+    
   }, ignoreNULL = FALSE)
   
   ws <- reactive({compute_ws(log(), days_to_average = input$days_to_average)})
