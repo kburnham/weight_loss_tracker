@@ -80,7 +80,7 @@ ui <- fluidPage(
            checkboxInput("include_dailies", "Show daily readings?", value = T),
            sliderInput("days_to_average", label = "Days to average", min = 1, max = 30, value = 7),
            sliderInput("date_range", "Date Range", min = as.Date("2017-07-01"),
-                       max = as.Date("2018-12-31"), value = c(as.Date("2017-07-01"), Sys.Date())),
+                       max = as.Date("2018-12-31"), value = c(as.Date("2018-01-01"), Sys.Date() + days(90))),
            sliderInput("weight_range", "Weight Range", min = 185, max = 270,
                        value = c(min, max))
            )
